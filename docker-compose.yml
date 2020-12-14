@@ -18,6 +18,6 @@ services:
       - "443:8443"
     volumes:
       - ./public-html:/app:rw
-      - ./config/nginx/nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro
+      - ./config/nginx/nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:rw
       - ./config/nginx/vhost:/opt/bitnami/nginx/conf/vhosts:rw
       - ./logs/nginx/${NGINX_VERSION}:/opt/bitnami/nginx/logs:rw
