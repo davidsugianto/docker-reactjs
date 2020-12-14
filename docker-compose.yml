@@ -1,0 +1,23 @@
+version: '3.5'
+
+networks:
+  app-net:
+    driver: bridge
+
+services:
+  nginx:
+    container_name: nginx
+    image: bitnami/nginx:${NGINX_VERSION}-${OS_VERSION}
+    restart: unless-stopped
+    environment:
+      - 'TZ=${TIMEZONE}'
+    networks:
+      - app-net
+    ports: 
+      - "80:8081"
+      - "443:8443"
+    volumes:
+      - ./public-html:/app:rw
+      - ./config/nginx/nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro
+      - ./config/nginx/vhost:/opt/bitnami/nginx/conf/vhosts:rw
+      - ./logs/nginx/${NGINX_VERSION}:/opt/bitnami/nginx/logs:rw
